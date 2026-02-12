@@ -444,7 +444,6 @@
             <audio id="bgMusic" loop>
                <source src="v14044g50000cnlk5bvog65h53m46u10.mp3" type="audio/mpeg">
             </audio>
-
         </div>
 
         <!-- Page 3: Scratch Card -->
@@ -456,10 +455,11 @@
                 <div class="scratch-container">
                     <p class="scratch-instruction">ขูดเพื่อดูปิ๊</p>
                     <div class="scratch-card">
-                         <img src="yong.jpg">
+                        <div class="scratch-message">
+                            <img src="yong.jpg">
+                            
                         </div>
-                        <canvas id="scratchCanvas"></canvas>
-
+                        <canvas id="scratchCanvas" width=" 960" height="778"></canvas>
                     </div>
                 </div>
                 <button class="btn btn-small" onclick="goToPage(4)" style="margin-top: 20px;">ถัดไป →</button>
@@ -474,8 +474,7 @@
             <div class="content">
                 <div class="photo-container">
                     <div class="photo-frame">
-                      <img src="nok.jpg" alt="Us">
-
+                        <img src="nok.jpg" alt="Us">
                         <!-- Replace with actual photo: <img src="your-photo.jpg" alt="Us"> -->
                     </div>
                 </div>
