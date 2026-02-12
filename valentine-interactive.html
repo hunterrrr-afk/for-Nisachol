@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;600;700&family=Sarabun:wght@300;400;600&family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --pink-light: #ffc8dd;
+            --pink-medium: #ffafcc;
+            --pink-dark: #ff87ab;
+            --pink-deep: #ff6b9d;
+            --purple: #bde0fe;
+            --cream: #fff5f8;
+            --text-dark: #4a0e4e;
+        }
+
+        body {
+            font-family: 'Mali', 'Sarabun', sans-serif;
+            background: linear-gradient(180deg, var(--pink-light) 0%, var(--pink-medium) 50%, var(--purple) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated hearts background */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart-float {
+            position: absolute;
+            font-size: 25px;
+            opacity: 0;
+            animation: floatUp 12s infinite ease-in;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+                transform: scale(1);
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(720deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Container */
+        .phone-frame {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 95vh;
+            max-height: 800px;
+            background: white;
+            border-radius: 35px;
+            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.3);
+            overflow: hidden;
+            z-index: 10;
+            margin: 20px;
+        }
+
+        /* Page container */
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .page.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Header */
+        .header {
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--pink-deep), var(--pink-dark));
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.2);
+        }
+
+        .header .rose {
+            display: inline-block;
+            animation: swing 2s infinite ease-in-out;
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        /* Content area */
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            background: linear-gradient(180deg, rgba(255, 200, 221, 0.3) 0%, rgba(255, 175, 204, 0.2) 100%);
+        }
+
+        /* Start Page */
+        .start-title {
+            font-family: 'Prompt', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--pink-deep);
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 8px rgba(255, 107, 157, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* Button */
+        .btn {
+            padding: 18px 50px;
+            font-family: 'Mali', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--pink-deep), var(--pink-dark));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 157, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Music Player */
+        .music-player {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.15);
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .music-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .music-text {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .music-title {
+            font-size: 0.9rem;
+            color: var(--pink-deep);
+            font-weight: 600;
+        }
+
+        /* Scratch Card */
+        .scratch-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .scratch-instruction {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .scratch-card {
+            position: relative;
+            width: 280px;
+            height: 200px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.2);
+        }
+
+        .scratch-message {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--pink-light), var(--pink-medium));
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+            touch-action: none;
+        }
+
+        /* Photo Display */
+        .photo-container {
+            margin-bottom: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .photo-frame {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 8px solid white;
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.3);
+            background: linear-gradient(135deg, var(--pink-light), var(--pink-medium));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .photo-placeholder {
+            font-size: 5rem;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Message Card */
+        .message-card {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.15);
+            text-align: center;
+            max-width: 300px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .message-card p {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .message-card .heart-emoji {
+            font-size: 2rem;
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
+        }
+
+        .signature {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: var(--pink-deep);
+            font-weight: 600;
+        }
+
+        /* Footer buttons */
+        .footer-btns {
+            padding: 20px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn-small {
+            padding: 12px 30px;
+            font-size: 1rem;
+            background: linear-gradient(135deg, var(--pink-medium), var(--pink-dark));
+        }
+
+        /* Audio element (hidden) */
+        audio {
+            display: none;
+        }
+
+        /* Confetti */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background hearts -->
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <!-- Phone Frame -->
+    <div class="phone-frame">
+        <!-- Page 1: Start -->
+        <div class="page active" id="page1">
+            <div class="header">
+                for Nisachol <span class="rose">🌹</span>
+            </div>
+            <div class="content">
+                <h1 class="start-title">Happy Valentine's Day 💕</h1>
+                <p class="subtitle">YING ❤ OUM</p>
+                <button class="btn" onclick="goToPage(2)"> กดตรงนี้</button>
+            </div>
+        </div>
+
+        <!-- Page 2: Music -->
+        <div class="page" id="page2">
+            <div class="header">
+                เพลงนี้เค้าให้แฟน<span class="rose">🌹</span>
+            </div>
+            <div class="content">
+                <div class="music-player">
+                    <div class="music-icon">🎵</div>
+                    <p class="music-text">ไม่ฟังเดี๋ยวต่อย</p>
+                    <p class="music-title">ขอสัญญาว่าจะรักเพียงคู๊ณณณณณ</p>
+                </div>
+                <button class="btn" onclick="playMusicAndContinue()">ปิ๊ๆ</button>
+            </div>
+            <audio id="bgMusic" loop>
+               <source src="c:\Users\lenovo\Downloads\Musketeers - แค่คุณ.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <!-- Page 3: Scratch Card -->
+        <div class="page" id="page3">
+            <div class="header">
+                ข้างในมีอะไรนะ <span class="rose">😳</span>
+            </div>
+            <div class="content">
+                <div class="scratch-container">
+                    <p class="scratch-instruction">ขูดเพื่อดูปิ๊</p>
+                    <div class="scratch-card">
+                        <div class="scratch-message">
+                            <img src="c:\Users\lenovo\Downloads\yong.jpg" alt="รูปภาพความรัก" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+                            
+                        </div>
+                        <canvas id="scratchCanvas" width=" 960" height="778"></canvas>
+                    </div>
+                </div>
+                <button class="btn btn-small" onclick="goToPage(4)" style="margin-top: 20px;">ถัดไป →</button>
+            </div>
+        </div>
+
+        <!-- Page 4: Photo -->
+        <div class="page" id="page4">
+            <div class="header">
+              
+            </div>
+            <div class="content">
+                <div class="photo-container">
+                    <div class="photo-frame">
+                        <div class="photo-placeholder">💑</div>
+                        <!-- Replace with actual photo: <img src="your-photo.jpg" alt="Us"> -->
+                    </div>
+                </div>
+                <div class="message-card">
+                    <p style="font-size: 0.8rem;">ตั้งแต่ 22 ตุลา 2567 ถึงวันนี้ก็ 1 ปี 3 เดือน 21 วันแล้วนะ แฟนอยู่กับเค้าในทุกช่วงเวลาเลย ไม่ว่าจะเหนื่อย ท้อ หรือมีความสุข แค่มีแฟนอยู่ข้างๆ ก็โอเคหมดเลย ไม่รู้อนาคตจะเป็นยังไง แต่วันนี้เค้ายังรักแฟนมากๆ มากกว่าเมื่อวาน และพรุ่งนี้ก็จะรักมากขึ้นอีกกก รักนะจุ้บุ้เด่กอ้วนของเค้า อยู่ด้วยกันแบบนี้ไปนานๆนะ สุขสันต์วันวาเลนไทน์นะคนอ้วนของเค้า</p>
+                  
+                    <span class="heart-emoji">❤️</span>
+                    
+                </div>
+            </div>
+            <div class="footer-btns">
+                <button class="btn btn-small" onclick="goToPage(3)">← ก่อนหน้า</button>
+                <button class="btn btn-small" onclick="celebrate()">ฉลอง! 🎉</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <script>
+        // Create floating hearts
+        function createFloatingHeart() {
+            const heartsBg = document.getElementById('heartsBg');
+            const heart = document.createElement('div');
+            heart.className = 'heart-float';
+            heart.textContent = ['💕', '❤️', '💖', '💗', '💓'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heart.style.animationDelay = Math.random() * 3 + 's';
+            heart.style.animationDuration = (Math.random() * 6 + 10) + 's';
+            heartsBg.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 12000);
+        }
+
+        setInterval(createFloatingHeart, 600);
+        for (let i = 0; i < 15; i++) {
+            setTimeout(createFloatingHeart, i * 200);
+        }
+
+        // Page navigation
+        function goToPage(pageNum) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById('page' + pageNum).classList.add('active');
+        }
+
+        // Music player
+        function playMusicAndContinue() {
+            const music = document.getElementById('bgMusic');
+            music.play().catch(e => console.log('Audio play failed:', e));
+            goToPage(3);
+            initScratchCard();
+        }
+
+        // Scratch Card
+        let isScratching = false;
+        let scratchInitialized = false;
+
+        function initScratchCard() {
+            if (scratchInitialized) return;
+            scratchInitialized = true;
+
+            const canvas = document.getElementById('scratchCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Create gradient overlay
+            const gradient = ctx.createLinearGradient(0, 0, 280, 200);
+            gradient.addColorStop(0, '#ff87ab');
+            gradient.addColorStop(0.5, '#ffafcc');
+            gradient.addColorStop(1, '#ffc8dd');
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 280, 200);
+
+            // Add text
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.font = 'bold 24px Mali, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('ขูดที่นี่', 140, 90);
+            ctx.font = '40px sans-serif';
+            ctx.fillText('💝', 140, 140);
+
+            // Scratching functionality
+            ctx.globalCompositeOperation = 'destination-out';
+
+            function scratch(e) {
+                if (!isScratching) return;
+
+                const rect = canvas.getBoundingClientRect();
+                const x = (e.clientX || e.touches[0].clientX) - rect.left;
+                const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+                ctx.beginPath();
+                ctx.arc(x, y, 20, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+
+            canvas.addEventListener('mousedown', () => isScratching = true);
+            canvas.addEventListener('mouseup', () => isScratching = false);
+            canvas.addEventListener('mousemove', scratch);
+
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                isScratching = true;
+            });
+            canvas.addEventListener('touchend', () => isScratching = false);
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                scratch(e);
+            });
+        }
+
+        // Celebration
+        function celebrate() {
+            const container = document.getElementById('confettiContainer');
+            const colors = ['#ff6b9d', '#ffafcc', '#ffc8dd', '#bde0fe', '#ffd6e0'];
+
+            for (let i = 0; i < 150; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    container.appendChild(confetti);
+
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 20);
+            }
+
+            // Vibrate
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100, 50, 100]);
+            }
+        }
+    </script>
+</body>
+</html>
